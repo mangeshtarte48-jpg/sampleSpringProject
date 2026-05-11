@@ -14,7 +14,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/sampleSpringProject.git'
+                git 'https://github.com/mangeshtarte48-jpg/sampleSpringProject.git'
             }
         }
 
