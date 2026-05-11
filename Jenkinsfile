@@ -6,17 +6,7 @@ pipeline {
         jdk 'JDK17'
     }
 
-    environment {
-        IMAGE_NAME = "sample-spring-app"
-    }
-
     stages {
-
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/mangeshtarte48-jpg/sampleSpringProject.git'
-            }
-        }
 
         stage('Build Maven') {
             steps {
@@ -26,24 +16,16 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh """
-                docker build -t ${IMAGE_NAME}:latest .
-                """
-            }
-        }
-
-        stage('Verify Image') {
-            steps {
-                sh 'docker images'
+                sh 'docker build -t sample-spring-app:latest .'
             }
         }
 
         stage('Deploy using Docker Compose') {
             steps {
-                sh """
+                sh '''
                 docker-compose down || true
                 docker-compose up -d --build
-                """
+                '''
             }
         }
     }
